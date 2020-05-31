@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using SimpleRestWebApi.WebApi.Models;
@@ -18,6 +19,25 @@ namespace SimpleRestWebApi.WebApi.Controllers
         {
             return new string((x + y).ToString());
         }
+
+        [HttpGet]
+        [Route("getSortedData")]
+        public IActionResult GetSortedData()
+        {
+            List<int> lstData = null;
+            Random random = new Random(1000);
+                  
+            for (var counter =0; counter < 100; counter++)
+            {
+                lstData =   new List<int>();
+                lstData.Add(random.Next());
+            }
+            if (lstData != null)
+            {
+                lstData.Sort();
+            }
+            return Ok(lstData);
+        }    
 
         [HttpPost]
         [Route("getList")]
